@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      FULL_NAME: "Мажейкин Александр Алексеевич"
+      FULL_NAME: "Казачков Константин Евгеньевич"
       GROUP_NUMBER: "M3113"
 
     steps:
