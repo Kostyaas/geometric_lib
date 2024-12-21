@@ -24,6 +24,9 @@ jobs:
         echo "Full Name: Иванов Иван Иванович"
         echo "Group Number: 12345"
         echo "GitHub Username: ${{ github.actor }}"
+
+    - name: checkout
+      uses: action/checkout@v3
       
     # Шаг 2: Установка Python 3.13
     - name: Set up Python 3.13
