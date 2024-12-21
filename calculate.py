@@ -21,6 +21,17 @@ sizes = {
 
 
 def calc(fig, func, size):
+    """
+    Вычисляет и выводит результат функции для заданной фигуры.
+
+    Параметры:
+    fig (str): Название фигуры ('circle' или 'square').
+    func (str): Название функции ('perimeter' или 'area').
+    size (list): Список размеров, необходимых для вычисления.
+
+    Пример вызова:
+    calc('circle', 'area', [5])
+    """
     assert fig in figs, f"Unknown figure: {fig}"
     assert func in figs[fig], f"Unknown function: {func}"
     assert all(s > 0 for s in size), "Size parameters must be positive"
@@ -30,6 +41,9 @@ def calc(fig, func, size):
 
 
 if __name__ == "__main__":
+    """
+    Основная функция, которая запрашивает у пользователя данные и вызывает calc.
+    """
     func = ''
     fig = ''
     size = []
