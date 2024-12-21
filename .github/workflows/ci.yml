@@ -1,52 +1,54 @@
-name: CI Workflow
+name: Python CI Workflow
 
 on:
   push:
     branches:
-      - main
+      - master
       - release
-      - feat/tests
   pull_request:
     branches:
       - master
       - release
       - develop
-      - feat/tests
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
-    
+
+    env:
+      FULL_NAME: "Мажейкин Александр Алексеевич"
+      GROUP_NUMBER: "M3113"
+
     steps:
-    # Шаг 1: Вывод ФИО, номера группы и ника на Github
-    - name: Output personal information
+    - name: Check out code
+      uses: actions/checkout@v3
+
+    - name: Print Personal Info
       run: |
-        echo "Full Name: Иванов Иван Иванович"
-        echo "Group Number: 12345"
+        echo "Full Name: $FULL_NAME"
+        echo "Group Number: $GROUP_NUMBER"
         echo "GitHub Username: ${{ github.actor }}"
 
-    - name: checkout
-      uses: action/checkout@v3
-      
-    # Шаг 2: Установка Python 3.13
     - name: Set up Python 3.13
       uses: actions/setup-python@v4
       with:
-        python-version: '3.13'
+        python-version: 3.13
 
-    # Шаг 3: Установка зависимостей из requirements.txt
+    - name: Check Python version
+      run: python --version
+
+    - name: Install pip
+      run: python -m ensurepip --upgrade
+
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r requirements.txt
+        python -m pip install -r requirements.txt
 
-    # Шаг 4: Запуск тестов с использованием Test Discovery
-    - name: Run tests
+    - name: Run unit tests
       run: |
-        python -m unittest discover -s tests
+        python -m unittest discover -s tests -p "*.py"
 
-    # Шаг 5: Проверка стиля кода с использованием flake8
-    - name: Check code style with flake8
+    - name: Lint code with flake8
       run: |
-        pip install flake8
         flake8 .
