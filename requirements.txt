@@ -1,2 +1,3 @@
+importlib-metadata
 pytest==6.0.0
 flake8==3.9.2
